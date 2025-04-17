@@ -8,8 +8,8 @@ from model.prophet_model import load_and_preprocess_data,preprocess_data_for_pro
 st.title("SALES FORECASTING FOR RETAIL BUSINESS")
 st.header('Insert the csv file for prediction')
 file=st.file_uploader("Upload Sales Dataset",type='csv')
-if file:
-    file
+if file is not None:
+    
     # Load and preprocess the data
     data = load_and_preprocess_data(file)
     st.header("Content of data")
@@ -18,7 +18,7 @@ if file:
     # Prepare data for Prophet model
     df = data[['ORDERDATE', 'SALES']]
     df = preprocess_data_for_prophet(df)
-    st.write(df.shape)
+    
     # Show the structured data
     st.header("Structuring of data into two columns ds & y")
     st.write(df)
