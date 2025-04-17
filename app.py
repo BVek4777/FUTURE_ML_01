@@ -43,6 +43,8 @@ if file is not None:
 
         st.subheader("📊 Forecasted Results")
         st.write(forecast.head())
+        csv = forecast.to_csv(index=False).encode('utf-8')
+        st.download_button("📥 Download Forecast Data", csv, "forecast.csv", "text/csv")
 
         # Display Metrics
         st.write("### 🧮 Model Accuracy Metrics")
