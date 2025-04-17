@@ -4,8 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
-import chardet
-
 
 def load_and_preprocess_data(file):
      data = pd.read_csv(file, encoding='latin-1')
