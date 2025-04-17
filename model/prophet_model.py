@@ -6,15 +6,22 @@ import streamlit as st
 import pandas as pd
 
 def load_and_preprocess_data(file):
-    data = pd.read_csv(file, encoding='latin-1')
-    data["ORDERDATE"] = pd.to_datetime(data["ORDERDATE"])
-    return data
+    encodings = ['utf-8', 'latin-1', 'ISO-8859-1', 'cp1252']
+    for enc in encodings:
+        try:
+            data = pd.read_csv(file, encoding=enc)
+            return data
+        except Exception:
+            continue
+    st.error("❌ Unable to read file with common encodings. Please check your file.")
+    st.stop()
 
 
 # Function to preprocess data for Prophet model (Renaming columns)
-def preprocess_data_for_prophet(data):
-    data.rename(columns={'ORDERDATE': 'ds', 'SALES': 'y'}, inplace=True)
-    return data
+def preprocess_data_for_prophet(data, ds_col, y_col):
+    return data.rename(columns={ds_col: 'ds', y_col: 'y'})
+
+
 # Function to perform forecasting with Prophet
 def forecast_prophet(data):
     # Chronologically split the data (80% train, 20% test)
@@ -23,7 +30,7 @@ def forecast_prophet(data):
     test = data[split_index:]
 
     # Initialize and fit Prophet model
-    model = Prophet(growth='linear',daily_seasonality=True,weekly_seasonality=True)
+    model = Prophet(growth='linear',daily_seasonality=False,weekly_seasonality=True,yearly_seasonality=True)
     model.fit(train)
 
     # Make future dataframe and forecast
