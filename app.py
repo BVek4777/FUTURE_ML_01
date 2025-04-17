@@ -1,5 +1,5 @@
 import streamlit as st
-import prophet
+from prophet import Prophet
 import pandas as pd
 import numpy as np
 from model.prophet_model import load_and_preprocess_data,preprocess_data_for_prophet , forecast_prophet, plot_forecast_results
