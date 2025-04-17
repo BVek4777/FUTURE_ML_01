@@ -28,9 +28,7 @@ if file is not None:
      # Display forecasted data
     st.header("Forecasted Data")
     st.write(forecast[:5])
-    st.write("test_data")
-    st.write(test_data)
-    st.write(test_data.shape)
+   
 
     # Display Accuracy Results
     st.write("### 📊 Model Accuracy Metrics")
