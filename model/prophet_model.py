@@ -4,17 +4,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
+import chardet
+
 
 def load_and_preprocess_data(file):
-    encodings = ['utf-8', 'latin-1', 'ISO-8859-1', 'cp1252']
-    for enc in encodings:
-        try:
-            data = pd.read_csv(file, encoding=enc)
-            return data
-        except Exception:
-            continue
-    st.error("❌ Unable to read file with common encodings. Please check your file.")
-    st.stop()
+     data = pd.read_csv(file, encoding='latin-1')
+     return data
+
+   
+
+
 
 
 # Function to preprocess data for Prophet model (Renaming columns)

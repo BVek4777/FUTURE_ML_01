@@ -50,7 +50,7 @@ if file is not None:
         st.write("### 🧮 Model Accuracy Metrics")
         st.write(f"✔ Mean Absolute Error (MAE): {mae:.2f}")
         st.write(f"✔ Root Mean Squared Error (RMSE): {rmse:.2f}")
-        st.write(f"✔ R² Score: {r2:.2f} (Higher is better)")
+        st.write(f"✔ R² Score(Higher is better):{r2:.2f} ")
 
         # Plot Results
         plot_forecast_results(forecast, model, test_data)
