@@ -27,6 +27,9 @@ if file is not None:
      # Display forecasted data
     st.header("Forecasted Data")
     st.write(forecast[:5])
+    csv = forecast.to_csv(index=False).encode('utf-8')
+    st.download_button("📥 Download Forecast Data", csv, "forecast.csv", "text/csv")
+
    
 
     # Display Accuracy Results
@@ -38,6 +41,7 @@ if file is not None:
      # Plot Actual vs Predicted Sales
     plot_forecast_results(forecast,model,test_data)
 
-    
+else:
+     st.warning("⚠️ Please upload a CSV file to proceed with forecasting.")  
    
     
