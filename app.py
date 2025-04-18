@@ -3,8 +3,20 @@ import pandas as pd
 import numpy as np
 from model.prophet_model import load_and_preprocess_data,preprocess_data_for_prophet , forecast_prophet, plot_forecast_results
 from pandas.api.types import is_datetime64_any_dtype
+import streamlit as st
+from PIL import Image
 
-st.title("SALES FORECASTING FOR RETAIL BUSINESS")
+image = Image.open("images/sales.jpg")
+image = image.resize((100, 100))  # adjust size as needed
+
+# Create two columns: one for image, one for title
+col1, col2 = st.columns([1,8 ])  # Adjust ratio to your liking
+
+with col1:
+    st.image(image)
+
+with col2:
+    st.title("SALES FORECASTING ")
 st.header('Insert the csv file for prediction')
 file=st.file_uploader("Upload Sales Dataset",type='csv')
 if file is not None:
@@ -41,7 +53,7 @@ if file is not None:
         # Forecast using Prophet
         forecast, mae, rmse, r2, model, test_data = forecast_prophet(df)
 
-        st.subheader("📊 Forecasted Results")
+        st.subheader("📋Forecasted Results")
         st.write(forecast.head())
         csv = forecast.to_csv(index=False).encode('utf-8')
         st.download_button("📥 Download Forecast Data", csv, "forecast.csv", "text/csv")

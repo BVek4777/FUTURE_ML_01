@@ -8,12 +8,6 @@ import pandas as pd
 def load_and_preprocess_data(file):
      data = pd.read_csv(file, encoding='latin-1')
      return data
-
-   
-
-
-
-
 # Function to preprocess data for Prophet model (Renaming columns)
 def preprocess_data_for_prophet(data, ds_col, y_col):
     return data.rename(columns={ds_col: 'ds', y_col: 'y'})
@@ -27,7 +21,7 @@ def forecast_prophet(data):
     test = data[split_index:]
 
     # Initialize and fit Prophet model
-    model = Prophet(growth='linear',daily_seasonality=False,weekly_seasonality=True,yearly_seasonality=True)
+    model = Prophet(growth='linear',daily_seasonality=True,weekly_seasonality=True,yearly_seasonality=True)
     model.fit(train)
 
     # Make future dataframe and forecast
