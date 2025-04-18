@@ -27,7 +27,7 @@ if file is not None:
     st.write(data.head())
 
     # Column selection for Prophet
-    st.subheader("🛠 Select Columns for Forecasting")
+    st.subheader("🛠 Select Columns for Forecasting Using Prophet")
     columns = data.columns.tolist()
 
     ds_column = st.selectbox("Select the Date Column (ds)", options=["None"] + columns)
